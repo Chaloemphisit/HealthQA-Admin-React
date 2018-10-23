@@ -10,9 +10,9 @@ import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 /*---------------------------------------- FontAwesome ----------------------------------------*/
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHome, faChartLine, faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
+import { faTachometerAlt, faChartLine, faSignOutAlt, faUserCircle } from '@fortawesome/free-solid-svg-icons'
 
-library.add(faHome, faChartLine, faSignOutAlt);
+library.add(faTachometerAlt, faChartLine, faSignOutAlt, faUserCircle);
 /*--------------------------------------------------------------------------------------------*/
 
 class App extends Component {
@@ -89,7 +89,7 @@ class App extends Component {
             <SideNav.Nav defaultSelected="home">
               <NavItem eventKey="home">
                 <NavIcon>
-                  <FontAwesomeIcon icon={faHome} style={{ fontSize: '1.75em' }} />
+                  <FontAwesomeIcon icon={faTachometerAlt} style={{ fontSize: '1.75em' }} />
                 </NavIcon>
                 <NavText>
                   Home

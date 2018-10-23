@@ -2,6 +2,8 @@ import React from 'react';
 import {
     Collapse, Navbar, NavbarToggler, Nav, NavLink, NavbarBrand, NavItem
 } from 'reactstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { Link } from 'react-router-dom'
 
 class TopNavBar extends React.Component {
     constructor(props) {
@@ -48,12 +50,15 @@ class TopNavBar extends React.Component {
                 <NavbarBrand href="/">Health QA Admin</NavbarBrand>
                 <NavbarToggler onClick={this.toggle} />
                 <Collapse isOpen={this.state.isOpen} navbar>
-                    <Nav className="ml-auto" navbar>
-                        <NavItem>
+                    <Nav className="ml-auto" navbar onClick={this.closeNav}>
+                        <NavItem >
                             <NavLink href="#">Components</NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink href="https://github.com/reactstrap/reactstrap">GitHub</NavLink>
+                            <Link to="/profile"><FontAwesomeIcon icon="user-circle" color="#DB3D44" size="2x" /></Link>
+                        </NavItem>
+                        <NavItem>
+                            <NavLink href="#">Components</NavLink>
                         </NavItem>
                     </Nav>
                 </Collapse>
