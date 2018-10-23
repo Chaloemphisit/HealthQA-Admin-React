@@ -1,22 +1,18 @@
 import React, { Component } from 'react';
-import SideNav, { NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
 // import { Link } from 'react-router-dom';
 import '../css/style.css';
 import Routing from '../routes'
-
+import { TopNavBar } from '../components'
+import SideNav, { NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
 // Be sure to include styles at some point, probably during your bootstraping
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
-
-import {
-  Collapse, Navbar, NavbarToggler, Nav, NavLink, NavbarBrand, Col
-} from 'reactstrap';
 
 /*---------------------------------------- FontAwesome ----------------------------------------*/
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHome, faChartLine, faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
 
-library.add(faHome, faChartLine, faSignOutAlt)
+library.add(faHome, faChartLine, faSignOutAlt);
 /*--------------------------------------------------------------------------------------------*/
 
 class App extends Component {
@@ -24,36 +20,38 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    this.toggle = this.toggle.bind(this);
-    this.closeNav = this.closeNav.bind(this)
     this.state = {
-      isOpen: false,
-      sideBarIsOpen: false
+      sideBarIsOpen: false,
+      navMargine: '64px'
     };
-    this.mainBody = React.createRef();
-
   }
 
   toggleSideBar = () => {
     this.setState({
       sideBarIsOpen: !this.state.sideBarIsOpen
-    });
-    console.log(this.state.sideBarIsOpen);
+    },
+      () => {
+        if (this.state.sideBarIsOpen === true) {
+          this.setState({
+            navMargine: '240px'
+          })
+        } else {
+          this.setState({
+            navMargine: '64px'
+          })
+        }
+      });
+    // console.log(this.state.sideBarIsOpen);
   }
 
-  toggle() {
-    this.setState({
-      isOpen: !this.state.isOpen
-    });
-  }
-
-  closeNav() {
-    if (this.state.isOpen === true) {
+  closeSideBar = () => {
+    if (this.state.sideBarIsOpen === true) {
       this.setState({
-        isOpen: false
+        sideBarIsOpen: false
       });
     }
   }
+
 
   // fake authentication Promise
   authenticate() {
@@ -75,34 +73,20 @@ class App extends Component {
   }
 
   render() {
+    // const navMargine = this.state.navMargine;
     return (
-
-      <React.Fragment>
-        <Navbar color="light" light expand="md" className="top-nav" style={this.state.sideBarIsOpen === true ? { marginLeft: '240px' } : { marginLeft: '64px' }}>
-          <NavbarBrand href="/">reactstrap</NavbarBrand>
-          <NavbarToggler onClick={this.toggle} />
-          <Collapse isOpen={this.state.isOpen} navbar>
-            <Nav className="ml-auto" navbar>
-              <NavItem>
-                <NavLink href="/components/">Components</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href="https://github.com/reactstrap/reactstrap">GitHub</NavLink>
-              </NavItem>
-            </Nav>
-          </Collapse>
-        </Navbar>
-
-        <div className="sidenav">
+      <div className="">
+        <div className="side-nav">
           <SideNav
             onSelect={(selected) => {
               const to = '/' + selected;
               console.log(to)
             }}
+          // expanded={this.state.sideBarIsOpen}
           >
 
             <SideNav.Toggle onClick={this.toggleSideBar} />
-            <SideNav.Nav defaultSelected="home" >
+            <SideNav.Nav defaultSelected="home">
               <NavItem eventKey="home">
                 <NavIcon>
                   <FontAwesomeIcon icon={faHome} style={{ fontSize: '1.75em' }} />
@@ -126,15 +110,15 @@ class App extends Component {
             </SideNav.Nav>
           </SideNav>
         </div>
-        <div id="body" className="container" style={this.state.sideBarIsOpen === true ? { marginLeft: '240px' } : { marginLeft: '64px' }}>
-          <div className="mt-5 ml-2 mb-3 mr-1">
-            <Col md={10} lg={12} xs={12} sm={12}>
-              <Routing />
-            </Col>
-            <Col md={2} lg={2}></Col>
+        <header>
+          <TopNavBar navMargine={this.state.navMargine} />
+        </header>
+        <main id="body" style={this.state.sideBarIsOpen === true ? { marginLeft: '240px' } : { marginLeft: '64px' }}>
+          <div id="content">
+            <Routing />
           </div>
-        </div>
-      </React.Fragment>
+        </main>
+      </div>
     );
   }
 }

@@ -8,7 +8,7 @@ import {
 export default class Home extends React.Component {
     render() {
         return (
-            <React.Fragment>
+            <div >
                 <Card>
                     <CardHeader>Header</CardHeader>
                     <CardBody>
@@ -18,7 +18,25 @@ export default class Home extends React.Component {
                     </CardBody>
                     <CardFooter>Footer</CardFooter>
                 </Card>
-            </React.Fragment>
+                <Card>
+                    <CardHeader>Header</CardHeader>
+                    <CardBody>
+                        <CardTitle>Special Title Treatment</CardTitle>
+                        <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
+                        <Button>Go somewhere</Button>
+                    </CardBody>
+                    <CardFooter>Footer</CardFooter>
+                </Card>
+                <Card>
+                    <CardHeader>Header</CardHeader>
+                    <CardBody>
+                        <CardTitle>Special Title Treatment</CardTitle>
+                        <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
+                        <Button>Go somewhere</Button>
+                    </CardBody>
+                    <CardFooter>Footer</CardFooter>
+                </Card>
+            </div>
         );
     };
 }
